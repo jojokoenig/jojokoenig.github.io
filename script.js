@@ -27,3 +27,11 @@ document.addEventListener("DOMContentLoaded", function() {
     title.appendChild(span);
   }
 });
+
+document.getElementById("p1").addEventListener("click", function() {
+        window.location.href = "https://example.com";
+    });
+
+    document.getElementById("p2").addEventListener("click", function() {
+      window.location.href = "https://page3.com";
+  });

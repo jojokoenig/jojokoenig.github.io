@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Move Image Change</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #111210;
+            overflow: hidden;
+        }
+        .image-container img {
+            width: 500px;
+            height: auto;
+            transition: opacity 0.3s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="image-container">
+        <img id="mainImage" src="Images/house1.jpeg" alt="Main Image">
+    </div>
+
+    <script>
+        const images = ["Images/house1.jpeg", "Images/house2.jpeg","Images/house3.jpeg"];
+        const mainImage = document.getElementById("mainImage");
+        let windowMiddle = window.innerWidth / 2;
+
+        document.addEventListener("mousemove", (event) => {
+            if (event.clientX < windowMiddle - 50) {
+                mainImage.src = images[1]; // Left side changes to second image
+                
+            } 
+            else if (event.clientX > windowMiddle + 50) {
+                mainImage.src = images[2]; // Right side changes to third image
+            } else {
+                mainImage.src = images[0]; // Default image in center
+            }
+        });
+
+        window.addEventListener("resize", () => {
+            windowMiddle = window.innerWidth / 2;
+        });
+    </script>
+</body>
+</html>

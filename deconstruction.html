@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Row with Text Box</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .title {
+            font-size: 90px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            
+            color: #2e0000;
+        }
+        .title:hover {
+            text-shadow: 0 0 20px rgb(255, 54, 54);
+            color: #ff0000;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            width: 400px;
+            height: auto;
+            border: 10px solid rgb(0, 25, 113);
+            padding: 10px;
+            transition: transform 0.1s ease-in-out;
+        }
+        .image-container img:hover {
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+        .text-box {
+            width: 80%;
+            padding: 20px;
+            background-color: white;
+            border: 2px solid black;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+    <script>
+        function changeText(newText) {
+            document.getElementById("text-content").textContent = newText;
+        }
+    </script>
+</head>
+<body>
+    <div class="title">Light Deconstructed</div>
+    <div class="image-container">
+        <img src="Images/img7.JPG" alt="Image 3" onmouseover="changeText('This two-dimentional abstract design, inspired by the phorograph on the right, explores the colors and shape in a very limited way.')">
+        <a href="Photographs.html" >
+        <img src="Images/img2.jpg" alt="Image 2" onmouseover="changeText('This project is an abstract interpretation of light. Using this photograph, I have created a two-dimensional and three-dimensional deconstructed representation of light. Click on the image to see more photography exploring Light.')">
+      </a>
+        <img src="Images/lightproj.jpeg" alt="Image 1" onmouseover="changeText('Developing on the two-dimentional form, I used various materials to explore transparency, texture and form. ')">
+    </div>
+    <div class="text-box">
+        <p id="text-content"></p>
+    </div>
+</body>
+</html>

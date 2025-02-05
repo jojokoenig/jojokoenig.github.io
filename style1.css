@@ -50,8 +50,8 @@ body {
     grid-template-rows: 100px 600px 100px;
     grid-template-areas:
     "header header header"
-    "sidebar fish fish"
-    "footer  .......  .......";
+    "fish fish fish"
+    "....  .......  .......";
     background-color: #fff;
     color: #7b0000;
   }

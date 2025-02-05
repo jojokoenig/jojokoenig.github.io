@@ -1,20 +1,128 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>
-        Lamp Page
-    </title>
-    <link rel="stylesheet" href="style1.css"><link>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background-color: #ffffff64;
+            margin: 0;
+            padding: 20px;
+        }
+        .slider-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .slider-container img {
+            width: 800px;
+            height: 800px;
+        }
+        .arrow {
+            font-size: 30px;
+            cursor: pointer;
+            margin: 0 20px;
+            user-select: none;
+            color: rgb(16, 0, 133);
+        }
+        .banner-container {
+            width: 100%;
+            margin-top: 20px;
+        }
+        .banner-container img {
+            width: 100%;
+            height: auto;
+        }
+        .subheading {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 10px;
+            width: 80%;
+            margin-left: -300px;
+            margin-top: 20px;
+        }
+        .grid-item {
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%; /* Makes it square */
+            
+        }
+        .grid-item img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .grid-item:hover img {
+            opacity: 0.5;
+        }
+        .grid-item .overlay {
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            font-weight: bold;
+            color: rgb(49, 0, 0);
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+        }
+        .grid-item:hover .overlay {
+            opacity: 1;
+        }
+    </style>
+    <script>
+        let images = ["Images/image1.jpeg", "Images/image2.jpeg", "Images/image3.jpeg"];
+        let currentIndex = 0;
+        
+        function changeImage(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1;
+            } else if (currentIndex >= images.length) {
+                currentIndex = 0;
+            }
+            document.getElementById("slider-image").src = images[currentIndex];
+        }
+    </script>
 </head>
-
 <body>
-  <div class="wrapper">
-    <div class="lamphead"><img src="Images/lamphead.png" alt="lamp"></div>
-    <div class="box sidebar">sidebar</div>
-    <div class="fish"><img src="Images/fish.jpeg" alt="fish"></div>
-    <div class="box footer">Footer</div>
-  </div>
+    <div class="slider-container">
+        <div class="arrow" onclick="changeImage(-1)">&#9665;</div>
+        <img id="slider-image" src="Images/image1.jpeg" alt="Sliding Image">
+        <div class="arrow" onclick="changeImage(1)">&#9655;</div>
+    </div>
+    <div class="banner-container">
+        <img src="Images/Time.jpeg" alt="Banner Image">
+    </div>
+    <div class="subheading">Hong Kong MTR Tiles</div>
+    <div class="grid-container">
+       
+        <div class="grid-item"><img src="Images/tile2.jpg" alt="Tile 2"><div class="overlay"><p>中環</p> <p>Central</p></div></div>
+        <div class="grid-item"><img src="Images/tile3.jpg" alt="Tile 3"><div class="overlay"><p>深水埗</p> <p>Sham Shui Po</p></div></div>
+        
+        <div class="grid-item"><img src="Images/tile7.jpg" alt="Tile 5"><div class="overlay"><p>油麻地</p> <p>Yau Ma Tei</p></div></div>
+        
+        <div class="grid-item"><img src="Images/tile7.png" alt="Tile 7"><div class="overlay"><p>旺角</p> <p>Mong Kok</p></div></div>
+        <div class="grid-item"><img src="Images/tile8.png" alt="Tile 8"><div class="overlay"><p>何文田</p> <p>Ho Man Tin</p></div></div>
+        <div class="grid-item"><img src="Images/tile9.png" alt="Tile 9"><div class="overlay"><p>太子</p> <p>Prince Edward</p></div></div>
+        <div class="grid-item"><img src="Images/tile10.png" alt="Tile 10"><div class="overlay"><p>佐敦</p> <p>Jordan</p></div></div>
+        <div class="grid-item"><img src="Images/tile11.png" alt="Tile 11"><div class="overlay"><p>尖沙咀</p> <p>Tsim Sha Tsui</p> </div></div>
+        <div class="grid-item"><img src="Images/tile12.png" alt="Tile 12"><div class="overlay"><p>九龍塘</p> <p>Kowloon Tong</p></div></div>
+    </div>
 </body>
-
 </html>
+

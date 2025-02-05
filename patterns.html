@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Looping Moving Images</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: rgb(81, 0, 0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .image-container {
+            display: flex;
+            gap: 10px;
+            position: absolute;
+            white-space: nowrap;
+        }
+        
+        .image-container img {
+            width: 350px;
+            height: 750px;
+            object-fit: cover;
+            transition: width 0.1s, height 0.1s;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container" id="imageContainer"></div>
+
+    <script>
+        let imageContainer = document.getElementById("imageContainer");
+        let imagePaths = ["Images/cuts.png", "Images/cuts.png", "Images/cuts.png", "Images/cuts.png"];
+        let imageSize = 350;
+        let speed = 2;
+        let moveDirection = 0; // -1 for left, 1 for right, 0 for stop
+
+        // Function to create images dynamically
+        function createImages() {
+            for (let i = 0; i < 6; i++) {
+                let img = document.createElement("img");
+                img.src = imagePaths[i % imagePaths.length];
+                img.classList.add("moving-image");
+                imageContainer.appendChild(img);
+            }
+        }
+
+        createImages(); // Initial images
+
+        function moveImages() {
+            let currentLeft = parseInt(getComputedStyle(imageContainer).left) || 0;
+            imageContainer.style.left = (currentLeft + moveDirection * speed) + "px";
+
+            // Check if images need recycling
+            let images = document.querySelectorAll(".moving-image");
+            let firstImage = images[0];
+            let lastImage = images[images.length - 1];
+
+            if (moveDirection === -1 && firstImage.getBoundingClientRect().right < 0) {
+                imageContainer.appendChild(firstImage); // Move first image to the end
+            } else if (moveDirection === 1 && lastImage.getBoundingClientRect().left > window.innerWidth) {
+                imageContainer.prepend(lastImage); // Move last image to the beginning
+            }
+
+            requestAnimationFrame(moveImages);
+        }
+
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "ArrowLeft") {
+                moveDirection = -1;
+            } else if (event.key === "ArrowRight") {
+                moveDirection = 1;
+            } else if (event.key === "ArrowUp") {
+                imageSize += 10;
+            } else if (event.key === "ArrowDown") {
+                imageSize = Math.max(50, imageSize - 10);
+            }
+
+            document.querySelectorAll(".moving-image").forEach(img => {
+                img.style.width = imageSize + "px";
+                img.style.height = (imageSize * (750 / 350)) + "px"; // Maintain aspect ratio
+            });
+        });
+
+        document.addEventListener("keyup", function(event) {
+            if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+                moveDirection = 0;
+            }
+        });
+
+        moveImages();
+    </script>
+</body>
+</html>
